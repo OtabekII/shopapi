@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bannerni O'chirish</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="mb-4">{{ banner.title }} ni o'chirishni xohlaysizmi?</h1>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Ha, o'chirish</button>
+        </form>
+        <a href="{% url 'banners:banner_list' %}" class="btn btn-secondary mt-3">Bekor qilish</a>
+    </div>
+</body>
+</html>

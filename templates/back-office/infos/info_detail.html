@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Info Detail</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Info Detail</h1>
+        <div class="card p-4 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Details for ID: {{ info.id }}</h5>
+                <p class="card-text"><strong>Phone Number:</strong> {{ info.phone_number }}</p>
+                <p class="card-text"><strong>Email:</strong> {{ info.email }}</p>
+                <p class="card-text"><strong>Address:</strong> {{ info.address }}</p>
+                <a href="{% url 'info-update' id=info.id %}" class="btn btn-warning">Update</a>
+                <a href="{% url 'info-delete' id=info.id %}" class="btn btn-danger">Delete</a>
+                <a href="{% url 'info-list' %}" class="btn btn-secondary">Back to List</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

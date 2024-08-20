@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wlist</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  
+    <div class="wishlist-container">
+        <h2>kolbasa,pepsi,olma</h2>
+        <ul class="wishlist-list">
+            {% for wish, image in combined %}
+                <li class="wishlist-item">
+                    <img src="{{ image.img.url }}" alt="{{ wish.product.name }}">
+                    <h3>{{ wish.product.name }}</h3>
+                    </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
