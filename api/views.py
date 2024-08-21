@@ -2,7 +2,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
  
  
-from .serializers import BannerSerializer, ContactSerializer, ProductSerializer, CategorySerializer 
+from .serializers import BannerSerializer, ProductSerializer, CategorySerializer, ContactSerializer
 from Goods.models import Banner, Contact, Product, Category, Cart
 from .serializers import CartSerializer
  
@@ -184,3 +184,58 @@ def remove_product(request):
     cart.save()
     return Response({"detail": "Product removed from cart"}, status=200)
 
+@api_view(['GET'])
+def product_enter(request, product):
+    cart_id = request.GET.get('cart_id')
+    cart = Cart.objects.get(id=cart_id)  # Assume the cart exists
+    product = Product.objects.get(id=product)  # Assume the product exists
+    cart.items.add(product)
+    cart.save()
+    return Response({"detail": "Product added to cart"}, status=200)
+
+@api_view(['GET'])
+def wishlist(request, ) :
+    user = request.user
+    wishlist = user.wish_list
+    serializer = ProductSerializer(wishlist, many=True)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def info_list(request, ) :
+    serializer = ContactSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors)
+
+@api_view(['GET'])
+def info_crate(request, ) :
+    serializer = ContactSerializer(Contact.objects.all(), many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def info_detail(request, id) :
+    contact = Contact.objects.get(id=id)
+    serializer = ContactSerializer(contact)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def info_update(request, id) :
+    contact = Contact.objects.get(id=id)
+    serializer = ContactSerializer(contact, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors)
+
+@api_view(['GET'])
+def info_delete(request, id) :
+    contact = Contact.objects.get(id=id)
+    contact.delete()
+    return Response(status=204)
+
+@api_view(['GET'])
+def cart_products(request, id):
+    cart = Cart.objects.get(id=id)
+    serializer = ProductSerializer(cart.items.all(), many=True)
+    return Response(serializer.data)

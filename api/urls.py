@@ -29,4 +29,16 @@ urlpatterns = [
     path('api/cart/last-achive-cart/', views.LastAchiveCartView.as_view(), name='last_achive_cart'),
     path('api/addproduct/', views.AddProductView.as_view(), name='add_product'),
     path('api/remove-product/', views.RemoveProductView.as_view(), name='remove_product'),
+
+    path('api/product-enter', views.product_enter),
+
+    path('api/wishlist', views.wishlist),
+
+    path('api/info-list', views.info_list),
+    path('api/info-crate', views.info_crate),
+    path('api/info-detail', views.info_detail),
+    path('api/info-update', views.info_update),
+    path('api/info-delete', views.info_delete),
+    
+    path('api/cart-products', views.cart_products),
 ]
